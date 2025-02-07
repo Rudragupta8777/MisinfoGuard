@@ -1,0 +1,408 @@
+/* Hide scrollbar in WebKit browsers */
+html::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit browsers */
+}
+
+/* Hide scrollbar in Firefox */
+html {
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    line-height: 1.5;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+}
+
+.nav-underline {
+    margin-left: 3%;
+    width: 94%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+}
+
+.logo {
+    color: #54f4fc;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.btn-sign-in {
+    border: 1px solid #54f4fc;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    color: #54f4fc;
+    text-decoration: none;
+    cursor: pointer; /* Add this line */
+}
+
+/* .btn-sign-in :hover {
+    background-color: #54F4FC;
+    color: #000000;
+}
+
+.footer-links a:hover {
+    color: #54f4fc;
+} */
+
+
+
+/* Background Image Container */
+.background-image {
+    position: absolute;
+    top: 7%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("assets/bg.png");
+    background-size: 60%;
+    background-position: left top;
+    background-repeat: no-repeat;
+    filter: brightness(1.5); /* Increase brightness */
+    z-index: -1; /* Ensure it stays behind other content */
+}
+
+/* Adjust the padding of the hero section */
+.hero {
+    position: relative;
+    padding: 2rem 4rem; /* Reduced top padding from 4rem to 2rem */
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Overlay for better text visibility */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Ensure text remains on top */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding-top: 2rem; /* Moves content slightly down if needed */
+}
+
+/* Adjust the margin of the hero-image container */
+.hero-image {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+    margin-left: auto; /* Ensures alignment to the right */
+    margin-top: -1rem; /* Pull the image up slightly */
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+}
+
+.hero-content h1 span {
+    color: #54f4fc;
+}
+
+.hero-content p {
+    margin-top: 3rem;
+    color: #d9d9d9;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #54f4fc;
+    color: #000000;
+}
+
+.btn-secondary {
+    border: 1px solid #54f4fc;
+    color: #54f4fc;
+}
+
+.small-text{
+    margin-left: 0;
+    color: #a8a9ac;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+/* Ensure Face Scan Image remains normal */
+.hero-image {
+    position: relative;
+    z-index: 2;
+}
+
+.right-image {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6rem; /* Increased spacing between columns */
+    padding: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.step {
+    display: flex;
+    flex-direction: row; /* Align icon and content horizontally */
+    align-items: center; /* Center items vertically */
+    gap: 1.8rem; /* Space between icon and content */
+}
+
+.step-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Prevent the icon from shrinking */
+}
+
+.step-icon img {
+    width: 80px; /* Adjust the size of the icon image */
+    height: 80px;
+}
+
+.step-content {
+    text-align: left; /* Align text to the left */
+    white-space: nowrap; /* Prevent text from wrapping to the next line */
+}
+
+.step-content h2 {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.step-content p {
+    color: #d9d9d9;
+    font-size: 0.9rem;
+    margin: 0; /* Remove default margin */
+    display: inline; /* Ensure the paragraph stays in the same line */
+}
+
+.description {
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto 2rem;
+    font-size: 1.5rem;
+    line-height: 1.7;
+    color: #e2e8f0;
+}
+
+.description span {
+    color: #54f4fc;
+    font-weight: 500;
+}
+
+.stats-container {
+    background: linear-gradient(90deg, #54F4FC 0%, #C6F0FF 36.85%, rgba(180, 243, 255, 0.90) 74.88%, #176DB4 99.27%);
+    /* background: linear-gradient(90deg, #54f4fc 0%, #3b82f6 100%); */
+    border-radius: 40px;
+    padding: 2.5rem;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    color: #000000;
+    font-weight:bolder;
+    margin-bottom: 0.2rem;
+}
+
+.stat-label {
+    color: #000000;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.prediction-section {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.prediction-section h2 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.prediction-section p {
+    font-size: 1.8rem;
+    color: #54f4fc;
+}
+
+
+.services {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto 6rem;
+}
+
+.services h1 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.service-card {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 3rem;
+    border: 1px solid #55F4FC;
+    /* border: 2px solid rgba(84, 244, 252, 0.2); Increased border width */
+    border-radius: 24px; /* Increased border radius */
+    text-align: center;
+}
+
+.service-icon {
+    margin-bottom: 1.5rem;
+}
+
+.service-icon img {
+    width: 94px; /* Set the size of the API.png image */
+    height: 94px;
+}
+
+.service-title {
+    background: linear-gradient(90deg, #55F4FC 5.48%, #1A6FB5 99.82%);
+    -webkit-background-clip: text; /* Apply gradient to text */
+    background-clip: text;
+    color: transparent; /* Make the text transparent to show the gradient */
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.service-description {
+    color: #e2e8f0;
+    font-weight: 200;
+    font-size: 1.2rem;
+    line-height: 1.7;
+}
+
+.footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 3rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+    margin-bottom: 3rem;
+}
+
+.footer-column h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: #e2e8f0;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #54f4fc;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0; /* Adjusted padding */
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+    margin-bottom: 5%;
+}
+
+.copyright {
+    color: #666666;
+    font-size: 0.875rem;
+}
+
+.footer-logo {
+    display: flex;
+    gap: 15px;
+    align-items: center; /* Center the logo vertically */
+}
+
+.footer-logo img {
+    width: 30px; /* Adjust the size of the logo */
+    height: 30px; /* Maintain aspect ratio */
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+.footer-logo img:hover {
+    opacity: 1;
+}
