@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISINFOGUARD - Login</title>
+    <link rel="stylesheet" href="page2.css">
+    <script src="page2.js" defer type="module"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">MISINFOGUARD</a>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#detect">Detect</a>
+            <a href="#filestack">File Stack</a>
+            <a href="#services">Services</a>
+            <a href="#footer">Quick Links</a>
+        </div>
+        <div class="login-buttons">
+            <a class="btn btn-sign-in" id="googleSignOutButton">SIGN OUT</a>
+        </div>
+    </nav>
+    <div class="nav-underline"></div> <!-- Line below the navigation -->
+
+    <!-- Background Image Container -->
+    <div class="background-image"></div>
+
+    <main class="hero">
+        <a href="#" class="btn btn-detect-button" id="uploadfile">
+            <div class="maskimg">
+                <img src="assets/maskimage.png" alt="buttonmaskimage">
+            </div>
+            <span id="detect" class="detect-text">DETECT</span>
+        </a>
+    </main>
+
+    <!-- Add this right before the closing body tag -->
+    <div class="modal-overlay" id="uploadModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Upload File</h2>
+                <button class="close-button" id="closeModal">&times;</button>
+            </div>
+            <div class="drop-zone" id="dropZone">
+                <p class="drop-zone-text">Drag and drop your file here</p>
+                <p>or</p>
+                <button class="file-input-button">Select File</button>
+                <input type="file" class="file-input" id="fileInput" accept="image/*,video/*,audio/*">
+                <div class="file-info" id="fileInfo"></div>
+            </div>
+            <button class="analyze-button" id="analyzeButton">Analyze File</button>
+        </div>
+    </div>
+    <div class="alert" id="successAlert">File uploaded successfully!</div>
+
+
+    <div id="filestack" class="history">
+        <h2>File Stack</h2>
+        <p>Your secure repository of verified file uploads with integrated deepfake detection results-every file verified, every upload secured.</p>
+    </div>
+
+    <div class="history-container">
+        <div class="history-list">
+            <!-- Genuine File Card -->
+            <div class="file-card genuine">
+                <span class="status-badge">Genuine</span>
+                <div class="file-icon">
+                    <img src="assets/File.png" alt="FileImage">
+                </div>
+                <span class="file-name">FILE NAME</span>
+            </div>
+
+            <!-- Fake File Card -->
+            <div class="file-card fake">
+                <span class="status-badge">Fake</span>
+                <div class="file-icon">
+                    <img src="assets/File.png" alt="FileImage">
+                </div>
+                <span class="file-name">FILE NAME</span>
+            </div>
+
+            <!-- Genuine File Card -->
+            <div class="file-card genuine">
+                <span class="status-badge">Genuine</span>
+                <div class="file-icon">
+                    <img src="assets/File.png" alt="FileImage">
+                </div>
+                <span class="file-name">FILE NAME</span>
+            </div>
+
+            <!-- Add more cards as needed -->
+        </div>
+    </div>
+
+    <!-- Add this modal right before the closing body tag -->
+    <div class="modal-overlay" id="fileDetailsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">File Details</h2>
+                <button class="close-button" id="closeFileDetailsModal">&times;</button>
+            </div>
+            <div class="file-details-content">
+                <div class="detail-item">
+                    <span class="detail-label">File URL:</span>
+                    <a href="#" class="detail-value" id="fileUrl"></a>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Score:</span>
+                    <span class="detail-value" id="fileScore"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Deepfake Detected:</span>
+                    <span class="detail-value" id="deepfakeStatus"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this to your HTML where the service card is -->
+    <div id="services" class="service-card-container">
+        <h1>Services we offer</h1>
+        <div class="service-card-flipper">
+            <!-- Front of card -->
+            <div class="service-card front">
+                <div class="service-icon">
+                    <img src="assets/API.png" alt="API Integration Icon">
+                </div>
+                <h3 class="service-title">Easy API Integration</h3>
+                <p class="service-description">
+                    Seamlessly integrate our powerful deepfake detection API into your platform. Designed for businesses, our API ensures fast, accurate verification of media content, helping you detect deepfakes at scale with ease.
+                </p>
+            </div>
+            <!-- Back of card -->
+            <div class="service-card back">
+                <h3 class="price-title">API Access</h3>
+                <div class="price">$99<span>/year</span></div>
+                <ul class="features">
+                    <li>Unlimited API Calls</li>
+                    <li>24/7 Support</li>
+                    <li>Real-time Detection</li>
+                    <li>Detailed Analytics</li>
+                </ul>
+                <button class="pay-button">Get API Key</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this modal for API key -->
+    <div class="api-modal-overlay">
+        <div class="api-modal">
+            <div class="modal-header">
+                <h2>Your API Key</h2>
+                <button class="close-api-modal">&times;</button>
+            </div>
+            <div class="api-key-content">
+                <p>Here's your API key:</p>
+                <div class="api-key">
+                    <code id="apiKeyText">MINFO-XX25-GUARD-7890-ABCD</code>
+                    <button class="copy-button">Copy</button>
+                </div>
+                <div class="api-instructions">
+                    <p>To use the API, include this key in your request headers:</p>
+                    <pre><code>X-API-Key: YOUR_API_KEY</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h2>Solutions</h2>
+                <ul class="footer-links">
+                    <li><a href="#">Deepfake Detection API</a></li>
+                    <li><a href="#">AI-Powered Browser Extension</a></li>
+                    <li><a href="#">Real-Time Media Verification</a></li>
+                    <li><a href="#">Business Integration Solutions</a></li>
+                    <li><a href="#">Misinformation Protection Tools</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h2>Quick Links</h2>
+                <ul class="footer-links">
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#footer">Quick Links</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">© 2024 All Rights Reserved</div>
+            <div class="footer-logo">
+                <img src="assets/github.png" alt="Github">
+                <img src="assets/instagram.png" alt="Instagram">
+                <img src="assets/linkedin.png" alt="Linkedin">
+                <img src="assets/Twitter.png" alt="Twitter">
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

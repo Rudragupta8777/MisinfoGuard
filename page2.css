@@ -1,0 +1,811 @@
+/* Hide scrollbar in WebKit browsers */
+html::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit browsers */
+}
+
+/* Hide scrollbar in Firefox */
+html {
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    line-height: 1.5;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+}
+
+.nav-underline {
+    margin-left: 3%;
+    width: 94%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+}
+
+.logo {
+    color: #54f4fc;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #54F4FC;
+}
+
+.btn-sign-in {
+    background-color: #54F4FC;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.btn-sign-in:hover {
+    background-color: #000000; /* Change background color on hover */
+    color: #54F4FC; /* Change text color on hover */
+    transform: scale(1.05); /* Slightly scale up the button */
+    box-shadow: 0 4px 12px rgba(84, 244, 252, 0.3); /* Add a glowing shadow */
+}
+/* Background Image Container */
+.background-image {
+    position: absolute;
+    top: 12%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("assets/bgpage2.png");
+    background-size: 100%;
+    background-position: left top;
+    background-repeat: no-repeat;
+    filter: brightness(1.5); /* Increase brightness */
+    z-index: -1; /* Ensure it stays behind other content */
+}
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(80vh - 60px);
+    padding: 2rem;
+}
+
+.btn-detect-button {
+    background: #000000;
+    border: 1px solid #54f4fc;
+    border-radius: 20px;
+    padding: 1rem 9rem; /* Increased horizontal padding to make the button wider */
+    display: flex;
+    align-items: center;
+    gap: 3rem; /* Further increased gap between image and text */
+    box-shadow: 0 0 20px rgba(84, 244, 252, 0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-detect-button:hover {
+    box-shadow: 0px 4px 8px 2px #55F4FC;
+    transform: scale(1.02);
+}
+
+.detect-text {
+    background: linear-gradient(90deg, #55F4FC 5.48%, #1A6FB5 99.82%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 3rem;
+    margin-left: 20%;
+    font-weight: 700;
+    letter-spacing: 1px;
+    z-index: 2;
+}
+
+/* Modal styles */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1a1a1a;
+    padding: 2.5rem;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    z-index: 1001;
+    box-shadow: 0 8px 32px rgba(84, 244, 252, 0.3),
+                0 16px 48px rgba(84, 244, 252, 0.2),
+                0 0 0 1px rgba(84, 244, 252, 0.1);
+    transition: all 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.modal-title {
+    color: #ffffff;
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.75rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #54f4fc;
+}
+
+.drop-zone {
+    border: 2px dashed rgba(84, 244, 252, 0.4);
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(84, 244, 252, 0.05);
+    box-shadow: inset 0 0 20px rgba(84, 244, 252, 0.1);
+}
+
+.drop-zone.dragover {
+    background-color: rgba(84, 244, 252, 0.1);
+    transform: scale(0.98);
+    box-shadow: inset 0 0 30px rgba(84, 244, 252, 0.2),
+                0 0 20px rgba(84, 244, 252, 0.2);
+}
+
+.drop-zone.has-file {
+    background-color: rgba(84, 244, 252, 0.1);
+    border-style: solid;
+    box-shadow: inset 0 0 30px rgba(84, 244, 252, 0.2),
+                0 0 20px rgba(84, 244, 252, 0.2);
+}
+
+.drop-zone.has-file::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(84, 244, 252, 0.1);
+    backdrop-filter: blur(6px);
+}
+
+.drop-zone-text {
+    margin-bottom: 1.5rem;
+    position: relative;
+    font-size: 1.25rem;  /* Increased from 1.1rem */
+    color: #ffffff;
+}
+
+.file-info {
+    display: none;
+    position: relative;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(84, 244, 252, 0.1);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 1.1rem;  /* Increased from 0.95rem */
+    box-shadow: 0 4px 12px rgba(84, 244, 252, 0.1);
+}
+
+.file-info.show {
+    display: block;
+}
+
+.file-input-button {
+    background-color: #54f4fc;
+    color: #000000;
+    padding: 1rem 2rem;  /* Increased padding */
+    border-radius: 12px;  /* Increased border radius */
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.25rem;  /* Increased from default */
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(84, 244, 252, 0.2);
+    min-width: 200px;  /* Added minimum width */
+}
+
+.file-input-button:hover {
+    transform: translateY(-2px);
+    background-color: #3dd8e0;
+    box-shadow: 0 6px 16px rgba(84, 244, 252, 0.3);
+}
+
+.file-input {
+    display: none;
+}
+
+.analyze-button {
+    display: none;
+    width: 100%;
+    background-color: #54f4fc;
+    color: #000000;
+    padding: 1.25rem;  /* Increased padding */
+    border-radius: 12px;  /* Increased to match file input button */
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.25rem;  /* Increased to match file input button */
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(84, 244, 252, 0.2);
+}
+
+.analyze-button:hover {
+    background-color: #3dd8e0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(84, 244, 252, 0.3);
+}
+
+.analyze-button.show {
+    display: block;
+}
+
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    background-color: rgba(84, 244, 252, 0.9);
+    color: #000000;
+    font-weight: 500;
+    transform: translateX(150%);
+    transition: transform 0.3s ease;
+    z-index: 2000;
+    box-shadow: 0 4px 16px rgba(84, 244, 252, 0.3);
+    font-size: 1.1rem;  /* Increased from default */
+}
+
+.alert.show {
+    transform: translateX(0);
+}
+.maskimg {
+    position: absolute;
+    top: 50%;
+    left: 30px; /* Further increased left positioning to move the image further from the text */
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.maskimg img {
+    width: 130px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.history {
+    text-align: center;
+    max-width: 1200px;
+    margin: 10% auto;
+}
+
+.history h2 {
+    font-size: 3.9rem;
+    margin-bottom: 2rem;
+}
+
+.history p {
+    font-weight: 400;
+    font-size: 2rem;
+    color: #54f4fc;
+}
+
+.history-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.history-list {
+    margin-top: -8%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three cards in a row */
+    gap: 2rem; /* Spacing between cards */
+    padding: 1rem;
+}
+
+.file-card {
+    background-color: #000000;
+    border: 2px solid;
+    padding: 1rem;
+    width: 100%; /* Ensure cards take up equal space */
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Genuine file styling */
+.file-card.genuine {
+    box-shadow: 0 0 20px rgba(84, 244, 252, 0.3);
+    transition: all 0.3s ease;
+    border-color: #000000;
+}
+
+.file-card.genuine:hover {
+    box-shadow: 0px 4px 8px 2px rgba(0, 255, 0, 0.4),
+               inset 0 0 30px rgba(0, 255, 0, 0.2);
+    transform: scale(1.02);
+}
+
+/* Fake file styling */
+.file-card.fake {
+    box-shadow: 0 0 20px rgba(84, 244, 252, 0.3);
+    transition: all 0.3s ease;
+    border-color: #000000;
+}
+
+.file-card.fake:hover {
+    box-shadow: 0px 4px 8px 2px rgba(255, 0, 0, 0.4),
+                inset 0 0 30px rgba(255, 0, 0, 0.2);
+    transform: scale(1.02);
+}
+
+.file-icon {
+    color: #54f4fc;
+    font-size: 2.5rem;
+}
+
+.file-name {
+    background: linear-gradient(90deg, #55F4FC 5.48%, #1A6FB5 99.82%);
+    background-clip: text;
+    color: transparent;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+/* Status indicator */
+.status-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.file-icon img {
+    width: 60px;
+    height: 60px;
+}
+
+.genuine .status-badge {
+    background-color: rgba(0, 255, 0, 0.1);
+    color: #00ff00;
+    border: 1px solid #00ff00;
+}
+
+.fake .status-badge {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #FF543E;
+    border: 1px solid #FF543E;
+}
+
+/* File Details Modal Styles */
+.file-details-content {
+    padding: 1.5rem 0;
+}
+
+.detail-item {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.detail-label {
+    color: #54f4fc;
+    font-weight: 600;
+    min-width: 140px;
+}
+
+.detail-value {
+    color: #ffffff;
+}
+
+.detail-value a {
+    color: #54f4fc;
+    text-decoration: none;
+}
+
+.detail-value a:hover {
+    text-decoration: underline;
+}
+
+/* Update file card styles */
+.file-card {
+    cursor: pointer;
+}
+
+.file-card.genuine {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.file-card.fake {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+.file-card.genuine:hover {
+    box-shadow: 0px 4px 8px 2px rgba(0, 255, 0, 0.4),
+                inset 0 0 30px rgba(0, 255, 0, 0.2);
+}
+
+.file-card.fake:hover {
+    box-shadow: 0px 4px 8px 2px rgba(255, 0, 0, 0.4),
+                inset 0 0 30px rgba(255, 0, 0, 0.2);
+}
+
+.service-card-container {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto 6rem;
+}
+
+.service-card-container h1{
+    margin-top: 3rem;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+/* Service Card Container and Flip Animation */
+.service-card-container {
+    perspective: 1000px;
+    width: 600px;
+    height: 500px;
+    margin: 0 auto;
+}
+
+.service-card-flipper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.service-card-container.flipped .service-card-flipper {
+    transform: rotateY(180deg);
+}
+
+.service-card.front,
+.service-card.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    padding: 2rem;
+    border-radius: 24px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 3rem;
+    border-radius: 24px;
+    text-align: center;
+    background-color: rgba(84, 244, 252, 0.02);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(84, 244, 252, 0.1),
+                0 16px 48px rgba(84, 244, 252, 0.05),
+                0 0 0 1px rgba(84, 244, 252, 0.1);
+    overflow: hidden;
+}
+
+/* Hover effect */
+.service-card.front:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(84, 244, 252, 0.2),
+                0 20px 60px rgba(84, 244, 252, 0.1),
+                0 0 0 2px rgba(84, 244, 252, 0.2);
+    background-color: rgba(84, 244, 252, 0.05);
+}
+
+/* Click animation */
+.service-card.front:active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(84, 244, 252, 0.15),
+                0 8px 24px rgba(84, 244, 252, 0.08),
+                0 0 0 2px rgba(84, 244, 252, 0.2);
+    background-color: rgba(84, 244, 252, 0.08);
+}
+
+.service-card.back {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(84, 244, 252, 0.05);
+}
+
+.service-icon {
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.05);
+}
+
+.service-icon img {
+    width: 94px;
+    height: 94px;
+}
+
+.service-title {
+    background: linear-gradient(90deg, #55F4FC 5.48%, #1A6FB5 99.82%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.service-description {
+    color: #e2e8f0;
+    font-weight: 200;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    transition: color 0.3s ease;
+}
+
+/* Price Styling */
+.price-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #55F4FC 5.48%, #1A6FB5 99.82%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.price {
+    font-size: 3.5rem;
+    color: #54f4fc;
+    margin-bottom: 1.5rem;
+}
+
+.price span {
+    font-size: 1.5rem;
+    opacity: 0.8;
+}
+
+.features {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.features li {
+    color: #e2e8f0;
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.pay-button {
+    background: linear-gradient(90deg, #55F4FC 5.48%, #1A6FB5 99.82%);
+    color: #000000;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pay-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(84, 244, 252, 0.3);
+}
+
+/* API Modal Styles */
+.api-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.api-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1a1a1a;
+    padding: 2rem;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 8px 32px rgba(84, 244, 252, 0.3);
+}
+
+.api-key {
+    background: rgba(84, 244, 252, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.api-key code {
+    font-family: monospace;
+    color: #54f4fc;
+    font-size: 1.2rem;
+}
+
+.copy-button {
+    background: #54f4fc;
+    color: #000000;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.api-instructions {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(84, 244, 252, 0.05);
+    border-radius: 8px;
+}
+
+.api-instructions pre {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+}
+
+.close-api-modal {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.75rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-api-modal:hover {
+    color: #54f4fc; 
+}
+
+.footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 12rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+    margin-bottom: 3rem;
+}
+
+.footer-column h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: #e2e8f0;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #54f4fc;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0; /* Adjusted padding */
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+    margin-bottom: 5%;
+}
+
+.copyright {
+    color: #666666;
+    font-size: 0.875rem;
+}
+
+.footer-logo {
+    display: flex;
+    gap: 15px;
+    align-items: center; /* Center the logo vertically */
+}
+
+.footer-logo img {
+    width: 30px; /* Adjust the size of the logo */
+    height: 30px; /* Maintain aspect ratio */
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+.footer-logo img:hover {
+    transform: scale(1.05); /* Slightly scale up the button */
+    box-shadow: 0 6px 14px #54F4FC;
+    opacity: 1;
+}

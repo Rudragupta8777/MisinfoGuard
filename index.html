@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MISINFO GUARD - Deepfake Detection</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>MISINFOGUARD - Home</title>
+    <link rel="stylesheet" href="index.css">
     <script src="main.js" defer type="module"></script>
 </head>
 <body>
     <nav class="navbar">
         <a href="#" class="logo">MISINFOGUARD</a>
         <div class="nav-links">
-            <a href="#">About Us</a>
-            <a href="#">Accuracy</a>
-            <a href="#">Services</a>
-            <a href="#">Solutions</a>
-            <a href="#">Quick Links</a>
+            <a href="#about-us">About Us</a>
+            <a href="#accuracy">Accuracy</a>
+            <a href="#services">Services</a>
+            <a href="#">Developers Team</a>
+            <a href="#footer">Quick Links</a>
         </div>
         <div class="login-buttons">
             <a class="btn btn-sign-in" id="googleSignInButton">SIGN IN</a>
@@ -32,7 +32,7 @@
             <h1>Comprehensive<br><span>Deepfake</span> Detection for<br>Security and Reliability</h1>
             <p>Easily upload an image, video, or audio file to analyze for potential deepfakes. Our advanced AI-powered detection system will assess the authenticity of your media and provide accurate insights to help you distinguish real from fake.</p>
             <div class="cta-buttons">
-                <a href="#" class="btn btn-primary">GET STARTED</a>
+                <a href="#" class="btn btn-primary" id="redirect">GET STARTED</a>
                 <a href="#" class="btn btn-secondary">Download our Browser Extension</a>
             </div>
             <p class="small-text">Use our extension on YouTube, WhatsApp, Zoom, and Google Meet to detect deepfakes in real-time.</p>
@@ -73,7 +73,7 @@
     </section>
 
 
-    <p class="description">
+    <p id="about-us" class="description">
         At <span>MISINFOGUARD</span>, we provide cutting-edge deepfake detection solutions for individuals and businesses. Our AI-powered Chrome extension lets users verify media in real-time, while our robust APIs help businesses detect deepfakes at scale. Whether through our website or extensions, we ensure digital authenticity and security against misinformation.
     </p>
 
@@ -92,14 +92,55 @@
         </div>
     </div>
 
-    <div class="prediction-section">
+    <div id="accuracy" class="prediction-section">
         <h2>Prediction Accuracy</h2>
         <p>Sample prediction results produced by our deepfake detection model</p>
+    </div>    
+
+    <!-- <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-item" data-detection="fake">
+                <img src="assets/sample1.png" alt="Portrait 1">
+            </div>
+            <div class="carousel-item" data-detection="real">
+                <img src="assets/sample2.png" alt="Portrait 2">
+            </div>
+            <div class="carousel-item" data-detection="fake">
+                <img src="assets/sample3.png" alt="Portrait 3">
+            </div>
+            <div class="carousel-item" data-detection="real">
+                <img src="assets/sample4.png" alt="Portrait 4">
+            </div>
+            <div class="carousel-item" data-detection="fake">
+                <img src="assets/sample5.png" alt="Portrait 5">
+            </div>
+            <div class="carousel-item" data-detection="real">
+                <img src="assets/sample6.png" alt="Portrait 6">
+            </div>
+            <div class="carousel-item" data-detection="fake">
+                <img src="assets/sample7.png" alt="Portrait 7">
+            </div>
+            <div class="carousel-item" data-detection="real">
+                <img src="assets/sample8.png" alt="Portrait 8">
+            </div>
+        </div>
+        
+        <div class="carousel-dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div> -->
+
+    <div class="carousel-container">
+        <div class="carousel" id="imageCarousel"></div> <!-- Images will be added dynamically here -->
+        <div class="carousel-dots" id="carouselDots"></div> <!-- Dots for navigation -->
     </div>
+    
 
-
-
-    <section class="services">
+    <section id="services" class="services">
         <h1>Services we offer</h1>
         <div class="service-card">
             <div class="service-icon">
@@ -114,7 +155,7 @@
 
 
 
-    <footer class="footer">
+    <footer id="footer" class="footer">
         <div class="footer-content">
             <div class="footer-column">
                 <h2>Solutions</h2>
@@ -129,12 +170,11 @@
             <div class="footer-column">
                 <h2>Quick Links</h2>
                 <ul class="footer-links">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Terms & Condition</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Developer</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#accuracy">Accuracy</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#footer">Quick Links</a></li>
+                </ul>                
             </div>
         </div>
         <div class="footer-bottom">
