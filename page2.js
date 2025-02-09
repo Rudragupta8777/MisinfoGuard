@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const upload = document.getElementById("googleSignOutButton");
 
-upload.addEventListener("click", function() {
+upload.addEventListener("click", function () {
     window.location.href = "index.html";
 });
 
@@ -79,10 +79,10 @@ upload.addEventListener("click", function() {
 //       if (currentFile) {
 //           // Here you can add your analysis logic
 //           console.log('Analyzing file:', currentFile.name);
-          
+
 //           // Show success alert
 //           showAlert();
-          
+
 //           // Close modal after short delay
 //           setTimeout(() => {
 //               modal.style.display = 'none';
@@ -139,7 +139,7 @@ upload.addEventListener("click", function() {
 //   function handleFiles(files) {
 //       if (files.length > 0) {
 //           currentFile = files[0];
-          
+
 //           // Update UI to show file is selected
 //           dropZone.classList.add('has-file');
 //           fileInfo.textContent = `Selected: ${currentFile.name}`;
@@ -165,7 +165,7 @@ upload.addEventListener("click", function() {
 // });
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('uploadModal');
     const dropZone = document.getElementById('dropZone');
     const fileInput = document.getElementById('fileInput');
@@ -179,28 +179,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let currentFile = null;
 
-    detectButton.addEventListener('click', function(e) {
+    detectButton.addEventListener('click', function (e) {
         e.preventDefault();
         modal.style.display = 'block';
     });
 
-    closeModal.addEventListener('click', function() {
+    closeModal.addEventListener('click', function () {
         modal.style.display = 'none';
         resetUploadState();
     });
 
-    modal.addEventListener('click', function(e) {
+    modal.addEventListener('click', function (e) {
         if (e.target === modal) {
             modal.style.display = 'none';
             resetUploadState();
         }
     });
 
-    fileInputButton.addEventListener('click', function() {
+    fileInputButton.addEventListener('click', function () {
         fileInput.click();
     });
 
-    analyzeButton.addEventListener('click', function() {
+    analyzeButton.addEventListener('click', function () {
         if (currentFile) {
             uploadFile(currentFile);
         }
@@ -278,19 +278,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
         detectText.textContent = 'Processing...'; // Show processing text
 
-        fetch('YOUR_BACKEND_ENDPOINT', {
+        const token = localStorage.getItem("token"); // Replace with your actual token
+
+        fetch('http://localhost:3000/user/data/upload', {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         })
-        .then(response => response.json())
-        .then(data => {
-            modal.style.display = 'none';
-            detectText.textContent = data.result; // Replace button text with result
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            detectText.textContent = 'Error!';
-        });
+            .then(response => response.json())
+            .then(data => {
+                modal.style.display = 'none';
+                detectText.textContent = data.result; // Replace button text with result
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                detectText.textContent = 'Error!';
+            });
+
     }
 });
 
@@ -329,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //         document.getElementById('fileUrl').textContent = fileDetails.url;
 //         document.getElementById('fileScore').textContent = fileDetails.score;
 //         document.getElementById('deepfakeStatus').textContent = fileDetails.isDeepfake ? 'Yes' : 'No';
-        
+
 //         // Show modal
 //         fileDetailsModal.style.display = 'block';
 //     });
@@ -353,95 +359,119 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const historyList = document.querySelector('.history-list');
-    const fileDetailsModal = document.getElementById('fileDetailsModal');
-    const closeFileDetailsModal = document.getElementById('closeFileDetailsModal');
+document.addEventListener("DOMContentLoaded", async () => {
+    const historyList = document.querySelector(".history-list");
+    const fileDetailsModal = document.getElementById("fileDetailsModal");
+    const closeFileDetailsModal = document.getElementById("closeFileDetailsModal");
 
-    // Function to fetch history data from backend
     async function fetchHistory() {
+        const token = localStorage.getItem("token");
         try {
-            const response = await fetch('https://your-backend-api.com/get-history'); // Replace with your API URL
-            const files = await response.json();
+            const response = await fetch("http://localhost:3000/user/data/", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
-            // Clear previous history
-            historyList.innerHTML = '';
+            const responseData = await response.json();
+            console.log("Raw response:", responseData); // Debug log
 
-            // Populate the history list with fetched data
-            files.forEach(file => {
-                const fileCard = document.createElement('div');
-                fileCard.classList.add('file-card', file.isDeepfake ? 'fake' : 'genuine');
+            // Extract files array from response object
+            const files = responseData.files || [];  // Ensure it's an array
 
-                fileCard.innerHTML = `
-                    <span class="status-badge">${file.isDeepfake ? 'Fake' : 'Genuine'}</span>
+            // Clear existing history
+            historyList.innerHTML = "";
+
+            // Create file cards
+            files.forEach((file) => {
+                const isDeepfake = file.is_deepfake === true;
+
+                // Create card element
+                const card = document.createElement("div");
+                card.classList.add("file-card", isDeepfake ? "fake" : "genuine");
+
+                card.innerHTML = `
+                    <span class="status-badge">${isDeepfake ? "Fake" : "Genuine"}</span>
                     <div class="file-icon">
                         <img src="assets/File.png" alt="File Image">
                     </div>
-                    <span class="file-name">${file.fileName}</span>
+                    <span class="file-name">${file.fileName || "Unnamed File"}</span>
                 `;
 
-                // Add click event to open modal with file details
-                fileCard.addEventListener('click', () => {
-                    document.getElementById('fileUrl').href = file.url;
-                    document.getElementById('fileUrl').textContent = file.url;
-                    document.getElementById('fileScore').textContent = file.score;
-                    document.getElementById('deepfakeStatus').textContent = file.isDeepfake ? 'Yes' : 'No';
-
-                    fileDetailsModal.style.display = 'block';
+                // Attach event listener properly
+                card.addEventListener("click", () => {
+                    document.getElementById("fileUrl").href = file.fileUrl || "#";
+                    document.getElementById("fileUrl").textContent = file.fileUrl || "URL not available";
+                    
+                    // Multiply score by 100, round it off
+                    document.getElementById("fileScore").textContent = file.score 
+                        ? Math.round(file.score * 100) + "%" 
+                        : "N/A";
+                    
+                    document.getElementById("deepfakeStatus").textContent = isDeepfake ? "Yes" : "No";
+                
+                    fileDetailsModal.style.display = "block";
                 });
+                
 
-                historyList.appendChild(fileCard);
+                // Append card to list
+                historyList.appendChild(card);
             });
+
+            if (files.length === 0) {
+                historyList.innerHTML = `<p style="color: white; text-align: center;">No files found.</p>`;
+            }
         } catch (error) {
-            console.error('Error fetching history:', error);
+            console.error("Error fetching history:", error);
         }
     }
 
-    // Fetch history on page load
+    // Initial fetch
     fetchHistory();
 
-    // Close modal when clicking the close button
-    closeFileDetailsModal.addEventListener('click', () => {
-        fileDetailsModal.style.display = 'none';
+    // Modal close handlers
+    closeFileDetailsModal.addEventListener("click", () => {
+        fileDetailsModal.style.display = "none";
     });
 
-    // Close modal when clicking outside
-    fileDetailsModal.addEventListener('click', (e) => {
+    fileDetailsModal.addEventListener("click", (e) => {
         if (e.target === fileDetailsModal) {
-            fileDetailsModal.style.display = 'none';
+            fileDetailsModal.style.display = "none";
         }
     });
 });
+
 
 
 
 
 
 // Service card flip functionality
-document.querySelector('.service-card-container').addEventListener('click', function() {
+document.querySelector('.service-card-container').addEventListener('click', function () {
     this.classList.toggle('flipped');
 });
 
 // Pay button functionality
-document.querySelector('.pay-button').addEventListener('click', function(e) {
+document.querySelector('.pay-button').addEventListener('click', function (e) {
     e.stopPropagation(); // Prevent card from flipping when clicking the button
     document.querySelector('.api-modal-overlay').style.display = 'block';
 });
 
 // Close modal functionality
-document.querySelector('.close-api-modal').addEventListener('click', function() {
+document.querySelector('.close-api-modal').addEventListener('click', function () {
     document.querySelector('.api-modal-overlay').style.display = 'none';
 });
 
 // Close modal when clicking outside
-document.querySelector('.api-modal-overlay').addEventListener('click', function(e) {
+document.querySelector('.api-modal-overlay').addEventListener('click', function (e) {
     if (e.target === this) {
         this.style.display = 'none';
     }
 });
 
 // Copy API key functionality
-document.querySelector('.copy-button').addEventListener('click', function() {
+document.querySelector('.copy-button').addEventListener('click', function () {
     const apiKey = document.getElementById('apiKeyText').textContent;
     navigator.clipboard.writeText(apiKey).then(() => {
         const originalText = this.textContent;

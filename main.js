@@ -17,7 +17,7 @@ onAuthStateChanged(auth, async (user) => {
         const token = await user.getIdToken();
         localStorage.setItem("token", token);
 
-        const response = await fetch("https://c84f-2409-40f4-ae-a14c-ac17-6087-d358-2e2e.ngrok-free.app/user/login", {
+        const response = await fetch("http://localhost:3000/user/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -52,7 +52,7 @@ googleLogin.addEventListener("click", function () {
             const token = await user.getIdToken();
 
             // Send token to backend
-            const response = await fetch("http://localhost:5000/api/user/login", {
+            const response = await fetch("http://localhost:3000/user/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
