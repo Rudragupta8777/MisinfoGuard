@@ -10,37 +10,37 @@ auth.languageCode = "en";
 // Initialize Google Auth Provider
 const provider = new GoogleAuthProvider();
 
-// Check if the user is already logged in
-onAuthStateChanged(auth, async (user) => {
-    if (user) {
-        // Send token to backend for verification
-        const token = await user.getIdToken();
-        localStorage.setItem("token", token);
+// // Check if the user is already logged in
+// onAuthStateChanged(auth, async (user) => {
+//     if (user) {
+//         // Send token to backend for verification
+//         const token = await user.getIdToken();
+//         localStorage.setItem("token", token);
 
-        const response = await fetch("http://localhost:3000/user/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            }
-        });
+//         const response = await fetch("http://localhost:3000/user/login", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 Authorization: `Bearer ${token}`
+//             }
+//         });
 
-        const data = await response.json();
-        console.log(data);
+//         const data = await response.json();
+//         console.log(data);
 
-        if (response.ok) {
-            localStorage.setItem("firstName", user.displayName.split(" ")[0]);
-            localStorage.setItem("email", user.email);
-            localStorage.setItem("uid", user.uid);
-            localStorage.setItem("lastLogin", new Date().toISOString());
+//         if (response.ok) {
+//             localStorage.setItem("firstName", user.displayName.split(" ")[0]);
+//             localStorage.setItem("email", user.email);
+//             localStorage.setItem("uid", user.uid);
+//             localStorage.setItem("lastLogin", new Date().toISOString());
 
-            alert("Login Successful");
-            window.location.href = "page2.html"; // Redirect if needed
-        } else {
-            alert("Login Failed: " + data.message);
-        }
-    }
-});
+//             alert("Login Successful");
+//             window.location.href = "page2.html"; // Redirect if needed
+//         } else {
+//             alert("Login Failed: " + data.message);
+//         }
+//     }
+// });
 
 // Set up the Google sign-in button click handler
 const googleLogin = document.getElementById("googleSignInButton");
@@ -68,6 +68,7 @@ googleLogin.addEventListener("click", function () {
                 localStorage.setItem("email", user.email);
                 localStorage.setItem("uid", user.uid);
                 localStorage.setItem("lastLogin", new Date().toISOString());
+                localStorage.setItem("token",token);
 
                 // alert("Authentication Done");
                 window.location.href = "page2.html";
